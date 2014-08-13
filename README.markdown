@@ -345,6 +345,22 @@ knowing the answer to the access question.
 Another approach is to use HTTP authentication. (See the config file comments on
 `authentication-method`.)
 
+Authentication through github
+-----------------------------
+
+If you want to authenticate the user from github through oauth2, you need to
+register your app with github to obtain a OAuth client secret and add the
+following section to your configuration file:
+
+```
+[Github]
+oauthclientid: 01239456789abcdef012
+oauthclientsecret: 01239456789abcdef01239456789abcdef012394
+oauthcallback: http://mysite/_githubCallback
+oauthoauthorizeendpoint: https://github.com/login/oauth/authorize
+oauthaccesstokenendpoint: https://github.com/login/oauth/access_token
+```
+
 Plugins
 =======
 
@@ -452,7 +468,7 @@ Proxying to `http://wiki.mysite.com`
 ------------------------------------
 
 Set up your DNS so that `http://wiki.mysite.com` maps to
-your server's IP address. Make sure that the `mod_proxy` module is
+your server's IP address. Make sure that the `mod_proxy`, `mod_proxy_http` and `mod_rewrite` modules are
 loaded, and set up a virtual host with the following configuration:
 
     <VirtualHost *>
